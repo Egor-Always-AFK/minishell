@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 14:47:52 by sdavos            #+#    #+#             */
-/*   Updated: 2022/06/21 17:57:48 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/21 18:26:41 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*ft_strdup(const char *s1)
 {
 	char	*str;
-	char	*ret;
 	int		i;
 
 	i = 0;
@@ -28,7 +27,5 @@ char	*ft_strdup(const char *s1)
 		i++;
 	}
 	str[i] = '\0';
-	ret = str;
-	free (str);
-	return (ret);
+	return (str);
 }

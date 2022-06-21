@@ -1,6 +1,6 @@
 SRCS	=	minishell.c envp_utils.c parser.c signals.c parse_help.c\
-			parse_help1.c exe_cmds.c pipes.c builtins.c exe_cmds2.c export_ms1.c signals1.c \
-			exe_cmds1.c clear.c builtins1.c exit_ms.c unset_ms.c export_ms.c exe_cmds3.c exe_cmds4.c parse_help2.c \
+			parse_help1.c exe_cmds.c pipes.c builtins.c  export_ms1.c signals1.c exe_cmds2.c exe_cmds3.c\
+			exe_cmds1.c clear.c builtins1.c exit_ms.c unset_ms.c export_ms.c parse_help2.c \
 			libft/ft_atoi.c    libft/ft_bzero.c   libft/ft_isalnum.c libft/ft_isalpha.c\
 	   		libft/ft_isascii.c libft/ft_isdigit.c libft/ft_isprint.c libft/ft_memchr.c\
 	   		libft/ft_memcmp.c   libft/ft_memcpy.c libft/ft_memmove.c libft/ft_memset.c\

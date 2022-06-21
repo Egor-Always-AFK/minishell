@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 14:47:52 by sdavos            #+#    #+#             */
-/*   Updated: 2022/06/21 18:08:00 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/21 19:02:51 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		trash_dst = malloc(sizeof(char));
 		trash_dst[0] = '\0';
 		ret = trash_dst;
-		free(trash_dst);
-		return (ret);
+		return (trash_dst);
 	}
 	else
 	{
@@ -39,8 +38,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		while (++idk2 < len)
 			*(trash_dst + idk2) = *(s + start + idk2);
 		*(trash_dst + idk2) = '\0';
-		ret = trash_dst;
-		free(trash_dst);
-		return (ret);
+		return (trash_dst);
 	}
 }

@@ -184,6 +184,10 @@ void	launch_command(t_cmds *cmd, char **envp, t_shell **shell)
 
 	path = NULL;
 	cmd_args = get_command_arguments(cmd->args);
+    // printf("%s\n", cmd_args[0]);
+    // printf("%s\n", cmd_args[1]);
+    // printf("%s\n", cmd_args[2]);
+    // printf("%s\n", cmd_args[3]);
 	if (!cmd_args)
 		error("error");
 	cmd->args->content = check_brackets(cmd);
@@ -194,6 +198,8 @@ void	launch_command(t_cmds *cmd, char **envp, t_shell **shell)
 	}
 	else if (ft_strchr(cmd->args->content, '/') != NULL)
     {
+        // printf("////obrab\n");
+        // exec_non_system_bin(cmd, &path, &cmd_args);
         cmd_args = get_command_arguments(cmd->args);
 	    if (!*cmd_args)
 		    error("Error");
@@ -207,12 +213,12 @@ void	launch_command(t_cmds *cmd, char **envp, t_shell **shell)
 	exit((*shell)->exit_status);
 }
 
-void	fork_error(t_shell **shell)
-{
-	(*shell)->exit_status = 128;
-	write(STDERR_FILENO, "minishell: fork: Error", 24);
-	exit((*shell)->exit_status);
-}
+// void	fork_error(t_shell **shell)
+// {
+// 	(*shell)->exit_status = 128;
+// 	write(STDERR_FILENO, "minishell: fork: Error", 24);
+// 	exit((*shell)->exit_status);
+// }
 
 pid_t	watch_child_process(t_shell **shell, t_cmds **cmds, int in, char **envp)
 {
@@ -274,40 +280,12 @@ void	wait_child_processes(t_shell **shell, pid_t id)
 	}
 }
 
-void	execute_bin(t_cmds **cmds, t_shell **shell, char **envp, int in)
-{
-	pid_t	pid;
+// void	execute_bin(t_cmds **cmds, t_shell **shell, char **envp, int in)
+// {
+// 	pid_t	pid;
 
-	(*shell)->exit_status = 0;
-	pid = watch_child_process(shell, cmds, in, envp);
-	close_all_pipes(((*shell)->pipes));
-	wait_child_processes(shell, pid);
-}
-
-char *check_brackets(t_cmds *cmd)
-{
-	char *str;
-	char *tmp;
-	char *ret;
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	str = (char *)cmd->args->content;
-	tmp = malloc(sizeof(char *) * 10);
-	while (str[i])
-	{
-		if (str[i] == '\'' || str[i] == '\"')
-			i++;
-		else
-		{
-			tmp[j] = str[i];
-			i++;
-			j++;
-		}
-	}
-	ret = tmp;
-	free(tmp);
-	return(ret);
-}
+// 	(*shell)->exit_status = 0;
+// 	pid = watch_child_process(shell, cmds, in, envp);
+// 	close_all_pipes(((*shell)->pipes));
+// 	wait_child_processes(shell, pid);
+// }

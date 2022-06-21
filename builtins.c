@@ -6,7 +6,7 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 18:13:01 by ocapers           #+#    #+#             */
-/*   Updated: 2022/06/21 18:14:20 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/21 19:03:51 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	echo_help(t_list *curr)
 	int		flag;
 	char	*str;
 	int		tmp;
-	int		count;
+	int count;
 
 	flag = 0;
 	count = counter(curr);
@@ -87,7 +87,8 @@ int	echo_help(t_list *curr)
 	{
 		str = curr->content;
 		i = 0;
-		if (tmp != 0 && curr && curr->content && (((char *)curr->content)[0]))
+		// printf("\n\n%s\n\n", curr->content);
+		if ( tmp != 0 && curr && curr->content && (((char *)curr->content)[0]))
 			write(STDOUT_FILENO, " ", 1);
 		if (str[0] == '\'' || str[0] == '\"')
 		{
@@ -130,11 +131,11 @@ void	echo_ms(t_list *args, t_shell **shell)
 	(*shell)->exit_status = 0;
 }
 
-int	counter(t_list *str)
+int counter(t_list *str)
 {
-	int		i;
-	t_list	*tmp;
-
+	int i;
+	t_list *tmp;
+	
 	tmp = str;
 	i = 0;
 	while (tmp != NULL)

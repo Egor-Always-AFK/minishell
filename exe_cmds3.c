@@ -23,50 +23,48 @@ char	*check_brackets(t_cmds *cmd)
 			j++;
 		}
 	}
-	ret = tmp;
-	free(tmp);
-	return (ret);
+	return (tmp);
 }
 
-int	handle_redirects(t_cmds *cmd, t_shell **shell, int in)
-{
-	int	i;
+// int	handle_redirects(t_cmds *cmd, t_shell **shell, int in)
+// {
+// 	int	i;
 
-	i = 0;
-	while (cmd->redirs && cmd->redirs[i])
-	{
-		open_files(cmd->redirs[i], shell, in);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (cmd->redirs && cmd->redirs[i])
+// 	{
+// 		open_files(cmd->redirs[i], shell, in);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
-void	execute_cmds(t_cmds **cmds, t_shell **shell, char **envp, char *line)
-{
-	int	in;
-	int	out;
+// void	execute_cmds(t_cmds **cmds, t_shell **shell, char **envp, char *line)
+// {
+// 	int	in;
+// 	int	out;
 
-	envp = NULL;
-	(*shell)->cmd_index = get_num_of_commands(cmds);
-	if ((*shell)->cmd_index > 1)
-		(*shell)->pipes = pipes_loop((*shell)->cmd_index);
-	if (*line != '\0')
-	{
-		in = dup(STDIN_FILENO);
-		out = dup(STDOUT_FILENO);
-		if (is_built_in(cmds[0]->args->content) && !cmds[1])
-		{
-			handle_redirects(cmds[0], shell, in);
-			built_ins(&(cmds[0]->envs), cmds[0], shell, envp);
-		}
-		else
-		{
-			execute_bin(cmds, shell, envp, in);
-		}
-		dup2(in, STDIN_FILENO);
-		dup2(out, STDOUT_FILENO);
-	}
-}
+// 	envp = NULL;
+// 	(*shell)->cmd_index = get_num_of_commands(cmds);
+// 	if ((*shell)->cmd_index > 1)
+// 		(*shell)->pipes = pipes_loop((*shell)->cmd_index);
+// 	if (*line != '\0')
+// 	{
+// 		in = dup(STDIN_FILENO);
+// 		out = dup(STDOUT_FILENO);
+// 		if (is_built_in(cmds[0]->args->content) && !cmds[1])
+// 		{
+// 			handle_redirects(cmds[0], shell, in);
+// 			built_ins(&(cmds[0]->envs), cmds[0], shell, envp);
+// 		}
+// 		else
+// 		{
+// 			execute_bin(cmds, shell, envp, in);
+// 		}
+// 		dup2(in, STDIN_FILENO);
+// 		dup2(out, STDOUT_FILENO);
+// 	}
+// }
 
 void	execute_bin(t_cmds **cmds, t_shell **shell, char **envp, int in)
 {

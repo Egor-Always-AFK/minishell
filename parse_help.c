@@ -16,7 +16,7 @@ char	*del_spaces(char *str)
 			i[1] = i[0];
 			while (str[++i[0]] && str[i[0]] == ' ')
 				;
-			tmp = ft_strjoin(tmp, ft_strdup(&str[i[0]]));
+			tmp = ft_strjoin(tmp, ft_strdup(&str[i[0]])); //зафришить начальные две строки
 			free(str);
 			i[0] = i[1];
 			str = tmp;
@@ -30,6 +30,7 @@ char	*del_spaces(char *str)
 
 static void	go_through_redirects(char *str, int i[5])
 {
+	// printf("%s\n", str);
 	if (str[(i[0])] && (str[i[0]] == '<' || str[i[0]] == '>'))
 		(i[0])++;
 	while (str[++(i[0])] && str[i[0]] == ' ')
@@ -55,6 +56,7 @@ char	*del_redirects(char *str)
 	char	*tmp;
 	int		i[5];
 
+	// printf("%s\n", str);
 	ft_memset(&i, 0, sizeof(int) * 5);
 	tmp = NULL;
 	while (str[i[0]])
@@ -63,9 +65,14 @@ char	*del_redirects(char *str)
 		if (!i[1] && !i[2] && (str[i[0]] == '<' || str[i[0]] == '>'))
 		{
 			tmp = ft_substr(str, 0, i[0]);
+			// printf("%s\n", tmp);
+			// printf("%d\n", i[0]);
 			i[4] = i[0];
 			go_through_redirects(str, i);
-			tmp = ft_strjoin(tmp, ft_strdup(&str[i[0]]));
+			// printf("%s\n", str);
+			// printf("%s\n", ft_strdup(&str[i[0]]));
+			tmp = ft_strjoin(tmp, ft_strdup(&str[i[0]])); //зафришить начальные две строки
+			// printf("%s\n", tmp);
 			free(str);
 			i[0] = i[4];
 			str = tmp;
@@ -73,8 +80,10 @@ char	*del_redirects(char *str)
 		}
 		i[0]++;
 	}
+	// printf("%s\n", tmp);
 	if (!tmp)
 		return (str);
+	// printf("%s\n", str);
 	return (tmp);
 }
 
@@ -97,10 +106,12 @@ int	get_type_of_redir(char *str, int *i)
 	return (-1);
 }
 
-char	*get_word_of_redir(char *str, int i[5])
+char *get_word_of_redir(char *str, int i[5])
 {
 	while (str[++i[0]] && str[i[0]] == ' ')
 		;
+	// printf("%d\n", i[0]);
+	// printf("%d\n", i[1]);
 	while (str[i[0] + i[4]] && !ft_strchr(" <>", str[i[0] + i[4]]))
 	{
 		quotes_check(&i[1], &i[2], str[i[0] + i[1]]);
@@ -114,5 +125,6 @@ char	*get_word_of_redir(char *str, int i[5])
 		}
 		i[4]++;
 	}
+	// printf("--%s\n", ft_substr(str, i[0], i[4]));
 	return (ft_substr(str, i[0], i[4]));
 }
