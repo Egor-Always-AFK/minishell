@@ -6,11 +6,21 @@
 /*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 14:47:52 by sdavos            #+#    #+#             */
-/*   Updated: 2022/06/21 19:02:51 by ocapers          ###   ########.fr       */
+/*   Updated: 2022/06/28 17:05:59 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static char	*help(char	*ret)
+{
+	char	*trash_dst;
+
+	trash_dst = malloc(sizeof(char));
+	trash_dst[0] = '\0';
+	ret = trash_dst;
+	return (ret);
+}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -18,15 +28,11 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*ret;
 	size_t	idk2;
 
+	ret = NULL;
 	if (s == NULL)
 		return (NULL);
 	if (ft_strlen((char *)s) < start)
-	{
-		trash_dst = malloc(sizeof(char));
-		trash_dst[0] = '\0';
-		ret = trash_dst;
-		return (trash_dst);
-	}
+		return (help(ret));
 	else
 	{
 		if (start + len > ft_strlen((char *)s))

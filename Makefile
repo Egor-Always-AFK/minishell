@@ -1,6 +1,8 @@
-SRCS	=	minishell.c envp_utils.c parser.c signals.c parse_help.c\
-			parse_help1.c exe_cmds.c pipes.c builtins.c  export_ms1.c signals1.c exe_cmds2.c exe_cmds3.c\
-			exe_cmds1.c clear.c builtins1.c exit_ms.c unset_ms.c export_ms.c parse_help2.c \
+SRCS	=	excve_pipes.c get_cmd_args.c builtins.c signal1.c clear_commands_array.c utils_funcs1.c\
+			utils_funcs2.c get_command_information.c pipes_cmds.c get_total_commands_validate_line.c\
+			here_doc.c minishell.c parser.c parse_path.c pipes.c num_of_cmds.c redirects.c\
+			func_del_q.c del_redirs.c signal2.c wait_child_process.c\
+			cd_utils.c cd_ms.c echo_ms.c env_ms.c exit_ms.c export_ms.c export_utils.c pwd_ms.c unset_ms.c\
 			libft/ft_atoi.c    libft/ft_bzero.c   libft/ft_isalnum.c libft/ft_isalpha.c\
 	   		libft/ft_isascii.c libft/ft_isdigit.c libft/ft_isprint.c libft/ft_memchr.c\
 	   		libft/ft_memcmp.c   libft/ft_memcpy.c libft/ft_memmove.c libft/ft_memset.c\
@@ -25,7 +27,7 @@ HS_LIB	=	readline/libhistory.a
 
 GCC		=	gcc
 
-FLAGS	=   -g #-fsanitize=address
+FLAGS	=  -Wall -Werror -Wextra
 
 RM		=	rm -f
 

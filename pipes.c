@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipes.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/28 15:59:24 by ocapers           #+#    #+#             */
+/*   Updated: 2022/06/28 15:59:26 by ocapers          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	close_all_pipes(int **pipes)
@@ -13,36 +25,36 @@ void	close_all_pipes(int **pipes)
 	}
 }
 
-void	open_pipes(int **pipes, int cmnds)
+void	open_pipes(int **pipes, int cmds)
 {
 	int	i;
 
 	i = 0;
-	while (i < cmnds - 1)
+	while (i < cmds - 1)
 	{
 		if (pipe(pipes[i]) == -1)
-			error("Error of pipe");
+			error("minishell: error of pipes\n");
 		i++;
 	}
 }
 
-int	**pipes_loop(int cmnds)
+int	**pipes_init(int cmds)
 {
 	int		i;
 	int		**pipes;
 
 	i = 0;
-	pipes = (int **)malloc(sizeof(int *) * cmnds);
+	pipes = (int **)malloc(sizeof(int *) * cmds);
 	if (!pipes)
-		error("Error of malloc");
-	while (i < cmnds - 1)
+		error("minishell: error of malloc");
+	while (i < cmds - 1)
 	{	
 		pipes[i] = malloc(sizeof(int) * 2);
 		if (!pipes[i])
-			error("Error of malloc");
+			error("minishell: error of malloc");
 		i++;
 	}
 	pipes[i] = NULL;
-	open_pipes(pipes, cmnds);
+	open_pipes(pipes, cmds);
 	return (pipes);
 }

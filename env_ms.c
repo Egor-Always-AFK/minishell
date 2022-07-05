@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   env_ms.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdavos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 14:47:52 by sdavos            #+#    #+#             */
-/*   Updated: 2021/10/13 14:47:57 by sdavos           ###   ########.fr       */
+/*   Created: 2022/06/28 15:57:58 by ocapers           #+#    #+#             */
+/*   Updated: 2022/06/28 16:59:30 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+void	env_ms(t_envlist *list)
 {
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
+	g_exit_status = 0;
+	while (list)
 	{
-		i++;
+		write(1, list->key, ft_strlen(list->key));
+		write(1, "=", 1);
+		write(1, list->value, ft_strlen(list->value));
+		write(1, "\n", 1);
+		list = list->next;
 	}
-	return (i);
 }

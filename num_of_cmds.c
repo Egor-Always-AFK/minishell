@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   num_of_cmds.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdavos <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 14:47:52 by sdavos            #+#    #+#             */
-/*   Updated: 2021/10/13 14:47:57 by sdavos           ###   ########.fr       */
+/*   Created: 2022/06/28 15:59:06 by ocapers           #+#    #+#             */
+/*   Updated: 2022/06/28 15:59:07 by ocapers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+bool	tabs_or_spaces(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\t')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+int	get_num_of_commands(t_cmds **cmds)
 {
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
-	{
+	while (cmds && cmds[i])
 		i++;
-	}
 	return (i);
 }

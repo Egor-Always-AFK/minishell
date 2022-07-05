@@ -1,4 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_ms.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ocapers <ocapers@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/28 15:58:14 by ocapers           #+#    #+#             */
+/*   Updated: 2022/06/28 17:00:03 by ocapers          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+int	num_of_list_elems(t_list *args)
+{
+	int		i;
+	t_list	*tmp;
+
+	i = 0;
+	tmp = args;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
 
 bool	is_numeric(const char *str)
 {
@@ -13,7 +40,7 @@ bool	is_numeric(const char *str)
 	return (true);
 }
 
-int	result(const char *str, unsigned long long res, int negative)
+static int	result(const char *str, unsigned long long res, int negative)
 {
 	int					i;
 	unsigned long long	long_num;
@@ -31,7 +58,7 @@ int	result(const char *str, unsigned long long res, int negative)
 	return (res * negative);
 }
 
-int	get_lvl(char *str, int negative)
+static int	get_lvl(char *str, int negative)
 {
 	unsigned long long	ret;
 	char				*tmp;
@@ -60,29 +87,28 @@ int	get_lvl(char *str, int negative)
 		return (255);
 }
 
-void	exit_ms(t_shell **shell, t_list *args)
+void	exit_ms(t_list *args)
 {
-	write(STDERR_FILENO, "exit\n", 5);
+	ft_putstr_fd("exit\n", 2);
 	if (args->next)
 	{
-		if (get_args_quantity(args) != 2)
+		if (num_of_list_elems(args) != 2)
 		{
-			write(STDERR_FILENO, "minishell: exit: ", 17);
-			write(STDERR_FILENO, args->content, ft_strlen(args->content));
-			write(STDERR_FILENO, " too many arguments\n", 20);
-			(*shell)->exit_status = 1;
+			ft_putstr_fd("minishell: exit: ", 2);
+			ft_putstr_fd(args->content, 2);
+			ft_putstr_fd(" too many arguments\n", 2);
+			g_exit_status = 1;
 		}
 		else if (is_numeric(args->next->content) == false)
 		{
-			write(STDERR_FILENO, "minishell: exit: ", 17);
-			write(STDERR_FILENO, args->next->content,
-				ft_strlen(args->next->content));
-			write(STDERR_FILENO, ": numeric argument required\n", 28);
-			(*shell)->exit_status = 255;
-			exit((*shell)->exit_status);
+			ft_putstr_fd("minishell: exit: ", 2);
+			ft_putstr_fd(args->next->content, 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
+			g_exit_status = 255;
+			exit(g_exit_status);
 		}
 		else if (is_numeric(args->next->content) == true)
 			exit(get_lvl(args->next->content, 1));
 	}
-	exit((*shell)->exit_status);
+	exit(g_exit_status);
 }
