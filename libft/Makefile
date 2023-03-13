@@ -1,6 +1,6 @@
 NAME = libft.a
 
-HEADER = libft.h
+HEADER = /libft/libft.h
 
 LIST = ft_atoi.c    ft_bzero.c   ft_isalnum.c ft_isalpha.c\
 	   ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c\
@@ -29,7 +29,7 @@ $(NAME) : $(OBJS)
 	ar rcs $(NAME) $?
 
 %.o : %.c libft.h
-	CC $(FLAGS) -c $< -o $@ -I ${HEADER}
+	gcc $(FLAGS) -c $< -o $@ -I ${HEADER}
 
 bonus : $(OBJS_BONUS) 
 	ar rcs $(NAME) $(OBJS_BONUS)

@@ -27,7 +27,7 @@ HS_LIB	=	readline/libhistory.a
 
 GCC		=	gcc
 
-FLAGS	=  -Wall -Werror -Wextra
+#FLAGS	=  -Wall -Werror -Wextra
 
 RM		=	rm -f
 
@@ -36,7 +36,7 @@ RM		=	rm -f
 
 $(NAME): $(OBJS) ./libft/libft.h
 	$(MAKE) -C libft bonus
-	$(GCC) $(FLAGS) $(OBJS) $(LNAME) $(RL_LIB) $(HS_LIB) -ltermcap -lreadline -o $(NAME)
+	$(GCC) $(FLAGS) $(OBJS) $(LNAME) $(RL_LIB) $(HS_LIB) -ltermcap  -o $(NAME)
 
 all:	$(NAME)
 
